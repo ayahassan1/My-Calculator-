@@ -1,0 +1,706 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication38
+{
+    class Program
+    {
+        static double PI = 3.1415;
+        static void options()
+        {
+            Console.WriteLine("   Welcome to my calculator   \n");
+            Console.WriteLine(" 1. Evaluate an Equation. \n");
+            Console.WriteLine(" 2. Calculate Factorial.\n");
+            Console.WriteLine(" 3. Convert to Binary.\n");
+            Console.WriteLine(" 4. Convert to Decimal.\n");
+            Console.WriteLine(" 5. Check prime or not prime.\n");
+            Console.WriteLine(" 6. Check Even or Odd.\n");
+            Console.WriteLine(" 7. Add 2 Matrices.\n");
+            Console.WriteLine(" 8. Multiply 2 matrices.\n");
+        }
+
+
+
+        static void factorial()
+        {
+            int number;
+            Console.Write("Enter the number you want to get its factorial =>  ");
+            number = int.Parse(Console.ReadLine());
+            int result = 1;
+            for (int i = 1; i <= number; i++)
+            {
+                result *= i;
+            }
+            Console.WriteLine("The Factorial of  " + number + "  is  >>>   " + result);
+        }
+
+
+        static void Exponential()
+        {
+            int x, limit;
+            float result = 0;
+            int power, factorial;
+            Console.WriteLine("Enter The power of e and The Limit of the series =>  ");
+            x = int.Parse(Console.ReadLine());
+            limit = int.Parse(Console.ReadLine());
+            for (int i = 0; i <= limit; i++)
+            {
+                power = 1; factorial = 1;
+                for (int j = 0; j < i; j++)
+                {
+                    power = power * x;
+                }
+                for (int m = 1; m <= i; i++)
+                {
+                    factorial *= m;
+                }
+                result += power / (float)factorial;
+            }
+            Console.WriteLine(result);
+        }
+
+
+        static void number_is_even_or_odd()
+        {
+            int number;
+
+            Console.WriteLine("Enter your number : ");
+            number = int.Parse(Console.ReadLine());
+            if (number % 2 == 0)
+            {
+                Console.WriteLine("      Number " + number + "    is even ");
+            }
+            else
+                Console.WriteLine("     Number " + number + "     is odd");
+        }
+
+
+        static void add_matrics()
+        {
+            int row, col;
+            Console.WriteLine(" Enter Size of matrics: ");
+            row = int.Parse(Console.ReadLine());
+            col = int.Parse(Console.ReadLine());
+            int[,] arr1 = new int[row, col];
+            int[,] arr2 = new int[row, col];
+            int[,] sum = new int[row, col];
+            Console.WriteLine(" Enter The First Matrix :  ");
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < col; j++)
+                {
+                    arr1[i, j] = int.Parse(Console.ReadLine());
+                }
+            }
+            Console.WriteLine(" Enter The Second Matrix :  ");
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < col; j++)
+                {
+                    arr2[i, j] = int.Parse(Console.ReadLine());
+                }
+            }
+            Console.WriteLine("The sum of the two matrices is =>  ");
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < col; j++)
+                {
+                    sum[i, j] = arr1[i, j] + arr2[i, j];
+                    Console.Write(sum[i, j] + "    ");
+                }
+
+            }
+            Console.WriteLine();
+        }
+
+
+        static void Prime()
+        {
+            int number;
+            bool prime = false;
+            Console.Write("Enter a number to check if prime or not =>  ");
+            number = int.Parse(Console.ReadLine());
+            if (number == 1)
+            {
+                Console.WriteLine(" Number  1  is not prime  ");
+            }
+            else if (number == 2)
+            {
+                Console.WriteLine("Number  2   is prime  ");
+            }
+            else
+            {
+                for (int i = 2; i < number; i++)
+                {
+                    if (number % i == 0)
+                    {
+                        prime = false;
+                        break;
+                    }
+                    else
+                        prime = true;
+                }
+                if (prime)
+                {
+                    Console.WriteLine("Number  " + number + "   is prime ");
+                }
+                else
+                    Console.WriteLine("Number  " + number + "   is not prime ");
+            }
+        }
+
+
+        static void decimal_to_binary()
+        {
+            int number;
+            int[] arr = new int[1000];
+            int digit = 0;
+            Console.Write("Enter the number:  ");
+            number = int.Parse(Console.ReadLine());
+            while (number > 0)
+            {
+
+                arr[digit] = number % 2;
+                number = number / 2;
+                digit++;
+            }
+            for (int i = digit - 1; i >= 0; i--)
+            {
+                Console.Write(arr[i]);
+            }
+            Console.WriteLine();
+        }
+
+
+        static int power(int bas, int power)
+        {
+            int result = 1;
+            for (int i = 0; i < power; i++)
+            {
+                result *= bas;
+            }
+            return result;
+        }
+
+
+        static void binary_To_decimal()
+        {
+            int binary, i = 0, sum = 0;
+            int s;
+            Console.Write("Enter Binary number : ");
+            binary = int.Parse(Console.ReadLine());
+
+            while (Convert.ToBoolean(binary))
+            {
+                s = binary % 10;
+                sum += power(2, i) * s;
+                binary = binary / 10;
+                i++;
+            }
+            Console.WriteLine(sum);
+        }
+
+
+
+        static void deci_to_hexa()
+        {
+            int[] hex = new int[1000];
+            int i = 0, decimalnumber;
+            Console.Write("Enter a decimal number :  ");
+            decimalnumber = int.Parse(Console.ReadLine());
+            while (decimalnumber != 0)
+            {
+                hex[i] = decimalnumber % 16;
+                decimalnumber = decimalnumber / 16;
+                i++;
+            }
+            Console.Write("The number in hexadecimal is :   ");
+            for (int j = i - 1; j >= 0; j--)
+            {
+                if (hex[j] > 9)
+                {
+                    if (hex[j] == 10) Console.Write("A");
+                    else if (hex[j] == 11) Console.Write("B");
+                    else if (hex[j] == 12) Console.Write("C");
+                    else if (hex[j] == 13) Console.Write("D");
+                    else if (hex[j] == 14) Console.Write("E");
+                    else if (hex[j] == 15) Console.Write("F");
+                }
+                else
+                {
+                    Console.Write(hex[j]);
+                }
+            }
+            Console.WriteLine();
+        }
+
+
+        static void octal_to_binary()
+        {
+            int octal, s, j = 0;
+            int[] binary = new int[1000];
+            Console.Write("Enter an octal number : ");
+            octal = int.Parse(Console.ReadLine());
+            while (octal > 0)
+            {
+                s = octal % 10;
+                for (int i = 0; i < 3; i++)
+                {
+                    binary[j] = s % 2;
+                    s = s / 2;
+                    j++;
+                }
+                octal = octal / 10;
+            }
+            Console.Write("The number in binary is :  ");
+            for (int y = j - 1; y >= 0; y--)
+                Console.Write(binary[y]);
+            Console.WriteLine();
+        }
+
+
+        static void binary_to_octal()
+        {
+            int binary, s, j = 0;
+            int[] octal = new int[1000];
+            Console.Write("Enter a binary number : ");
+            binary = int.Parse(Console.ReadLine());
+            while (binary > 0)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    s = binary % 10;
+                    octal[j] += power(2, i) * s;
+                    binary = binary / 10;
+
+                }
+                j++;
+            }
+            Console.Write("The number in octal is :  ");
+            for (int y = j - 1; y >= 0; y--)
+            {
+                Console.Write(octal[y]);
+            }
+            Console.WriteLine();
+        }
+
+
+        static void binary_to_hexadecimal()
+        {
+            int[] hex = new int[1000];
+            int i = 0, j = 0, rem, dec = 0, binary = 0;
+            Console.Write("Enter a binary number :  ");
+            binary = int.Parse(Console.ReadLine());
+            while (Convert.ToBoolean(binary))
+            {
+                rem = binary % 2;
+                dec = dec + rem * power(2, i);
+                binary = binary / 10;
+                i++;
+            }
+            i = 0;
+            while (dec != 0)
+            {
+                hex[i] = dec % 16;
+                dec = dec / 16;
+                i++;
+            }
+            Console.Write("The hexadecimal value: ");
+            for (j = i - 1; j >= 0; j--)
+            {
+                if (hex[j] > 9)
+                {
+                    if (hex[j] == 10) Console.Write("A");
+                    else if (hex[j] == 11) Console.Write("B");
+                    else if (hex[j] == 12) Console.Write("C");
+                    else if (hex[j] == 13) Console.Write("D");
+                    else if (hex[j] == 14) Console.Write("E");
+                    else if (hex[j] == 15) Console.Write("F");
+                }
+                else
+                {
+                    Console.Write(hex[j]);
+                }
+            }
+            Console.WriteLine();
+        }
+
+
+        static void octal_to_decimal()
+        {
+            int octal, deci = 0, s, j = 0;
+            Console.Write("Enter an octal number : ");
+            octal = int.Parse(Console.ReadLine());
+            while (octal > 0)
+            {
+                s = octal % 10;
+                deci += s * power(8, j);
+                j++;
+                octal = octal / 10;
+            }
+            Console.Write("The number in decimal is :  ");
+            Console.WriteLine(deci);
+        }
+
+
+        static void decimal_to_octal()
+        {
+            int deci, j = 0;
+            int[] octal = new int[1000];
+            Console.Write("Enter a decimal number : ");
+            deci = int.Parse(Console.ReadLine());
+            while (deci > 0)
+            {
+                octal[j] = deci % 8;
+                deci = deci / 8;
+                j++;
+            }
+            Console.Write("The number in octal is :  ");
+            for (int i = j - 1; i >= 0; i--)
+            {
+                Console.Write(octal[i]);
+            }
+            Console.WriteLine();
+        }
+
+
+        static void octal_to_hexadecimal()
+        {
+            int octal, s, deci = 0, j = 0, i = 0;
+            int[] hexa = new int[1000];
+            Console.Write("Enter an octal number :  ");
+            octal = int.Parse(Console.ReadLine());
+            while (octal > 0)
+            {
+                s = octal % 10;
+                deci += s * power(8, j);
+                j++;
+                octal = octal / 10;
+            }
+            while (deci != 0)
+            {
+                hexa[i] = deci % 16;
+                deci = deci / 16;
+                i++;
+            }
+            for (int y = i - 1; y >= 0; y--)
+            {
+                if (hexa[y] > 9)
+                {
+                    if (hexa[y] == 10) Console.Write("A");
+                    else if (hexa[y] == 11) Console.Write("B");
+                    else if (hexa[y] == 12) Console.Write("C");
+                    else if (hexa[y] == 13) Console.Write("D");
+                    else if (hexa[y] == 14) Console.Write("E");
+                    else if (hexa[y] == 15) Console.Write("F");
+
+                }
+                else Console.Write(hexa[y]);
+            }
+            Console.WriteLine();
+        }
+
+
+        static void power()
+        {
+            double number;
+            Console.Write("Enter the number you want to get its power =>  ");
+            number = int.Parse(Console.ReadLine());
+            int exp;
+            Console.Write("Enter the power of number =>  ");
+            exp = int.Parse(Console.ReadLine());
+
+            double result = 1;
+            for (int i = 1; i <= exp; i++)
+            {
+                result *= number;
+            }
+            Console.WriteLine("The  Power of  " + number + "  is  >>>   " + result);
+        }
+
+
+        static void multi_matrics()
+        {
+
+            int row1, col1;
+            int row2, col2;
+            int row3, col3;
+            Console.WriteLine(" Enter Size of the first matrics: ");
+            row1 = int.Parse(Console.ReadLine());
+            col1 = int.Parse(Console.ReadLine());
+            Console.WriteLine(" Enter Size of the second matrics: ");
+            row2 = int.Parse(Console.ReadLine());
+            col2 = int.Parse(Console.ReadLine());
+            row3 = row1; col3 = col2;
+            int[,] arr1 = new int[row1, col1];
+            int[,] arr2 = new int[row2, col2];
+            int[,] multi = new int[row3, col3];
+            Console.WriteLine(" Enter The First Matrix :  ");
+            for (int i = 0; i < row1; i++)
+            {
+                for (int j = 0; j < col1; j++)
+                {
+                    arr1[i, j] = int.Parse(Console.ReadLine());
+                }
+            }
+            Console.WriteLine(" Enter The Second Matrix :  ");
+            for (int i = 0; i < row2; i++)
+            {
+                for (int j = 0; j < col2; j++)
+                {
+                    arr2[i, j] = int.Parse(Console.ReadLine());
+                }
+            }
+            for (int i = 0; i < row3; i++)
+            {
+                for (int j = 0; j < col3; j++)
+                {
+                    multi[i, j] = 0;
+                    for (int a = 0; a < row2; a++)
+                    {
+                        multi[i, j] += arr1[i, a] * arr2[a, j];
+                    }
+                }
+            }
+            Console.WriteLine("Output Matrix:");
+
+            for (int i = 0; i < row3; i++)
+            {
+
+                for (int j = 0; j < col3; j++)
+                {
+
+                    Console.WriteLine(multi[i, j]);
+
+
+                }
+
+                Console.WriteLine();
+
+            }
+        }
+
+        static void root()
+        {
+            Console.WriteLine(" please enter the degree of root:     ");
+            int degree = int.Parse(Console.ReadLine());
+            Console.WriteLine(" please enter the number:     ");
+            int number = int.Parse(Console.ReadLine());
+            for (int i = 1; i <= number; i++)
+            {
+                if (i * i == number && degree == 2)
+                {
+                    Console.WriteLine(" the Square root of " + number + " ==> " + i);
+                    break;
+                }
+                else if (i * i * i == number && degree == 3)
+                {
+                    Console.WriteLine(" the Cubic root of " + number + " ==> " + i);
+                    break;
+                }
+            }
+        }
+        static void forsin()
+        {
+            double angle_degree;
+            Console.WriteLine("Enter angle in degree to calculate sin(x): ");
+            angle_degree = double.Parse(Console.ReadLine());
+            double angle_radian, sum = 0, term, nume, deno;
+            angle_radian = (angle_degree * PI) / 180;
+            int i = 2;
+            nume = angle_radian;
+            deno = 1;
+            do
+            {
+                term = nume / deno;
+                nume = -nume * angle_radian * angle_radian;
+                deno = deno * i * (i + 1);
+                sum = sum + term;
+                i = i + 2;
+            } while (term >= 0.00001);
+            Console.WriteLine("Sin(" + angle_degree + ") = " + sum);
+
+        }
+        static void forcos()
+        {
+            float angle_degree;
+            Console.WriteLine("Enter angle in degree to calculate cos(x): ");
+            angle_degree = float.Parse(Console.ReadLine());
+            double angle_radian = (angle_degree * PI) / 180;
+            double ans = 1;
+            double temp = 1;
+            int accuracy = 4;
+            for (int i = 1; i <= 2 * accuracy; i += 2)
+            {
+                temp = temp * (-1) * angle_radian * angle_radian / (i * (i + 1));
+                ans += temp;
+            }
+            Console.WriteLine("Cos(" + angle_degree + ") = " + ans);
+        }
+        static void fortan()
+        {
+            double angle_degree;
+            Console.WriteLine("Enter angle in degree to calculate tan(x): ");
+            angle_degree = double.Parse(Console.ReadLine());
+            double angle_radian, sum = 0, term, nume, deno;
+            angle_radian = (angle_degree * PI) / 180;
+            int a = 2;
+            nume = angle_radian;
+            deno = 1;
+            do
+            {
+                term = nume / deno;
+                nume = -nume * angle_radian * angle_radian;
+                deno = deno * a * (a + 1);
+                sum = sum + term;
+                a = a + 2;
+            } while (term >= 0.00001);
+            double ans = 1;
+            double temp = 1;
+            int accuracy = 4;
+            for (int i = 1; i <= 2 * accuracy; i += 2)
+            {
+                temp = temp * (-1) * angle_radian * angle_radian / (i * (i + 1));
+                ans += temp;
+            }
+            Console.WriteLine("Tan(" + angle_degree + ") = " + sum / ans);
+        }
+        static void forsec()
+        {
+            float angle_degree;
+            Console.WriteLine("Enter angle in degree to calculate sec(x): ");
+            angle_degree = float.Parse(Console.ReadLine());
+            double angle_radian = (angle_degree * PI) / 180;
+            double ans = 1;
+            double temp = 1;
+            int accuracy = 4;
+            for (int i = 1; i <= 2 * accuracy; i += 2)
+            {
+                temp = temp * (-1) * angle_radian * angle_radian / (i * (i + 1));
+                ans += temp;
+            }
+            Console.WriteLine("Sec(" + angle_degree + ") = " + 1 / ans);
+        }
+
+        static void forcsc()
+        {
+            double angle_degree;
+            Console.WriteLine("Enter angle in degree to calculate csc(x): ");
+            angle_degree = double.Parse(Console.ReadLine());
+            double angle_radian, sum = 0, term, nume, deno;
+            angle_radian = (angle_degree * PI) / 180;
+            int i = 2;
+            nume = angle_radian;
+            deno = 1;
+            do
+            {
+                term = nume / deno;
+                nume = -nume * angle_radian * angle_radian;
+                deno = deno * i * (i + 1);
+                sum = sum + term;
+                i = i + 2;
+            } while (term >= 0.00001);
+            Console.WriteLine("Csc(" + angle_degree + ") = " + 1 / sum);
+        }
+        static void forcot()
+        {
+            double angle_degree;
+            Console.WriteLine("Enter angle in degree to calculate cot(x): ");
+            angle_degree = double.Parse(Console.ReadLine());
+            double angle_radian, sum = 0, term, nume, deno;
+            angle_radian = (angle_degree * PI) / 180;
+            int a = 2;
+            nume = angle_radian;
+            deno = 1;
+            do
+            {
+                term = nume / deno;
+                nume = -nume * angle_radian * angle_radian;
+                deno = deno * a * (a + 1);
+                sum = sum + term;
+                a = a + 2;
+            } while (term >= 0.00001);
+            double ans = 1;
+            double temp = 1;
+            int accuracy = 4;
+            for (int i = 1; i <= 2 * accuracy; i += 2)
+            {
+                temp = temp * (-1) * angle_radian * angle_radian / (i * (i + 1));
+                ans += temp;
+            }
+            Console.WriteLine("Cot(" + angle_degree + ") = " + ans / sum);
+        }
+
+
+   static void ln()        // ln(x)= 2 * y * (1 + (y^2 / 3) +(y^4 / 5 ) + (y^6 / 7) + (y^8 / 9 ) + .....) 
+{ 
+	double x, power = 1;
+	Console.Write( "Enter number to get ln(number) : ");
+	x=double.Parse(Console.ReadLine());                 
+	double y = (x - 1) / (x + 1);
+
+	double count = 3;
+	 double ln = 1;
+	for (int i = 2; i <= 1000; i += 2){
+		power = 1;
+		for (int j = 0; j < i; j++){
+			power *= y;
+		}
+		ln += power /(double) count;
+		count += 2;
+	}
+	ln = ln * 2 * y;
+    Console.WriteLine(ln);
+}
+
+
+
+        static void Main(string[] args)
+        {
+            int operation;
+            char choice;
+            options();
+            do
+            {
+                Console.WriteLine(" Please choose the operation :  ");
+                operation = int.Parse(Console.ReadLine());
+                switch (operation)
+                {
+                    case 1:
+                        octal_to_hexadecimal();
+                        break;
+                    case 2:
+                        ln();
+                        break;
+                    case 3:
+                        decimal_to_binary();
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        Prime();
+                        break;
+                    case 6:
+                        number_is_even_or_odd();
+                        break;
+                    case 7:
+                        add_matrics();
+                        break;
+                    default:
+                        Console.WriteLine(" Wrong choice \n Try again. ");
+                        break;
+                }
+                Console.WriteLine(" Do you want to do another operation (y/n) ?  ");
+
+                choice = char.Parse(Console.ReadLine());
+            } while (choice == 'y');
+        }
+
+
+    }
+}
+
+

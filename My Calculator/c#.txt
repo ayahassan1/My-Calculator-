@@ -1,0 +1,565 @@
+???? ?????? ?? unicode ?? definition 
+string \u004don;
+????? ???? Mon ="Hello";
+ 
+
+??? ?? M ?? unicode ?????? \u004d
+
+????? ?????? \u004D 
+???? ??? ??? ??? ???????? ???? ?????? \u004d  
+?? M
+
+
+
+
+
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace WindowsFormsApplication5
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        static double PI = 3.1415;
+        string c;
+        double y;
+        private void button14_Click(object sender, EventArgs e)  // numbers
+        {
+            Button x = (Button)sender;
+          
+            if (textBox1.Text == "0")
+            {
+                textBox1.Clear();
+            }
+            textBox1.Text = textBox1.Text + x.Text; 
+            if (x.Text == "."&& textBox1.Text==".")
+            {
+                textBox1.Text = "0.";
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e) // clear button
+        {
+            textBox1.Text = "0";
+        }
+ private void button17_Click(object sender, EventArgs e)
+        {
+            Button x = (Button)sender;
+            c = x.Text;
+            y = double.Parse(textBox1.Text);
+            label1.Text = textBox1.Text + " " + c;
+            textBox1.Clear();
+        }
+
+      private void button21_Click(object sender, EventArgs e)
+        {
+            Button x = (Button)sender;
+            c = x.Text;
+            label1.Text = textBox1.Text + " " + c;
+            
+        }
+
+
+
+        private void button18_Click(object sender, EventArgs e)
+        {                                                        // equal button
+            switch (c)
+            {
+                case "Bin":
+                    {
+                        int binary, i = 0, sum = 0;
+                        int s;
+                        binary = int.Parse(textBox1.Text);
+                       while (Convert.ToBoolean(binary))
+                        {
+                            int result = 1;
+                            for (int j = 0; j < i; j++)
+                            {
+                                result *= 2;
+                            }
+                            s = binary % 10;
+                            sum += result * s;
+                            binary = binary / 10;
+                            i++;
+                        }
+                        textBox1.Text = "Decimal:";
+                        textBox1.Text = Convert.ToString(sum);
+                        label1.Text = "";
+                        s = 0;
+                        int z = 0;
+                        int[] octal = new int[1000];
+                        while (binary > 0)
+                        {
+                            for (int a = 0; a < 3; a++)
+                            {
+                                int result = 1;
+                                for (int j = 0; j < a; j++)
+                                {
+                                    result *= 2;
+                                }
+                                s = binary % 10;
+                                octal[z] += result * s;
+                                binary = binary / 10;
+                            }
+                            z++;
+                        }
+                        for (int y = z - 1; y >= 0; y--)
+                        {
+                            textBox1.Text = Convert.ToString(octal[y]);
+                        }
+                        label1.Text = "";
+                    }
+                    break;
+
+                case "Oct":
+                    {
+                        string result = "";
+                        int octal, s, j = 0;
+                        int[] binary = new int[1000];
+                        octal = int.Parse(textBox1.Text);
+                        while (octal > 0)
+                        {
+                            s = octal % 10;
+                            for (int i = 0; i < 3; i++)
+                            {
+                                binary[j] = s % 2;
+                                s = s / 2;
+                                j++;
+                            }
+                            octal = octal / 10;
+                        }
+                        int t = 0;
+                        foreach (int m in binary)
+                        {
+                            result += m.ToString();
+                            t++;
+                            if (t == 4)
+                            {
+                                result += " ";
+                                t = 0;
+                            }
+                        }
+                        char[] strArray = result.ToCharArray();
+                        Array.Reverse(strArray);
+                        result = new string(strArray);
+                        string f_result = result.Remove(0, 1231);
+                        textBox1.Text = Convert.ToString("Binary: " + f_result);
+
+                        int deci = 0, d, o = 0;
+                        while (octal > 0)
+                        {
+                            int result2 = 1;
+                            for (int i = 0; i < o; i++)
+                            {
+                                result2 *= 8;
+                            }
+                            d = octal % 10;
+                            deci += d * result2;
+                            o++;
+                            octal = octal / 10;
+                        }
+                        textBox1.Text = Convert.ToString("Decimal: " + deci);
+                    }
+                    break;
+                case "1/x":
+                    {
+                        double number = double.Parse(textBox1.Text);
+                        textBox1.Text = Convert.ToString(1 / number);
+                        label1.Text = "";
+                    }
+                    break;
+                case "n!":
+                    {
+                        
+                        int result = 1;
+                        for (int i = 1; i <=int.Parse(textBox1.Text) ; i++)
+                        {
+                            result *= i;
+                        }
+                      textBox1.Text= Convert.ToString(result);
+                      label1.Text = "";
+                    }break;
+
+                case "ln":
+                    {
+                        double power = 1;
+                        double y = (double.Parse(textBox1.Text) - 1) / (double.Parse(textBox1.Text) + 1);
+
+                        double count = 3;
+                        double ln = 1;
+                        for (int i = 2; i <= 1000; i += 2)
+                        {
+                            power = 1;
+                            for (int j = 0; j < i; j++)
+                            {
+                                power *= y;
+                            }
+                            ln += power / (double)count;
+                            count += 2;
+                        }
+                        ln = ln * 2 * y;
+                        textBox1.Text = Convert.ToString(ln);
+                        
+                    }break;
+                case "Sin":
+                    {
+                        double angle_degree = Convert.ToDouble(textBox1.Text);
+                        double angle_radian, sum = 0, term, nume, deno;
+                        angle_radian = (angle_degree * PI) / 180;
+                        int i = 2;
+                        nume = angle_radian;
+                        deno = 1;
+                        do
+                        {
+                            term = nume / deno;
+                            nume = -nume * angle_radian * angle_radian;
+                            deno = deno * i * (i + 1);
+                            sum = sum + term;
+                            i = i + 2;
+                        } while (term >= 0.00001);
+                        textBox1.Text = Convert.ToString(sum);
+                            label1.Text = "";
+                    }break;
+
+                case "Cos":
+                    {
+                        double angle_degree = double.Parse(textBox1.Text);
+                        double angle_radian = (angle_degree * PI) / 180;
+                        double ans = 1;
+                        double temp = 1;
+                        int accuracy = 4;
+                        for (int i = 1; i <= 2 * accuracy; i += 2)
+                        {
+                            temp = temp * (-1) * angle_radian * angle_radian / (i * (i + 1));
+                            ans += temp;
+                        }
+                        textBox1.Text = Convert.ToString(ans);
+                        label1.Text = "";
+                    }break;
+
+                case "Tan":
+                    {
+                        double angle_degree = double.Parse(textBox1.Text);
+                        double angle_radian, sum = 0, term, nume, deno;
+                        angle_radian = (angle_degree * PI) / 180;
+                        int a = 2;
+                        nume = angle_radian;
+                        deno = 1;
+                        do
+                        {
+                            term = nume / deno;
+                            nume = -nume * angle_radian * angle_radian;
+                            deno = deno * a * (a + 1);
+                            sum = sum + term;
+                            a = a + 2;
+                        } while (term >= 0.00001);
+                        double ans = 1;
+                        double temp = 1;
+                        int accuracy = 4;
+                        for (int i = 1; i <= 2 * accuracy; i += 2)
+                        {
+                            temp = temp * (-1) * angle_radian * angle_radian / (i * (i + 1));
+                            ans += temp;
+                        }
+                        textBox1.Text = Convert.ToString(sum / ans);
+                        label1.Text = "";
+                    }break;
+                case "Sinh":
+                    {
+                        double angle_degree = double.Parse(textBox1.Text);
+                        double angle_radian = (angle_degree * PI) / 180;
+                        double ans = 1;
+                        double temp = 1;
+                        int accuracy = 4;
+                        for (int i = 1; i <= 2 * accuracy; i += 2)
+                        {
+                            temp = temp * (-1) * angle_radian * angle_radian / (i * (i + 1));
+                            ans += temp;
+                        }
+                        textBox1.Text = Convert.ToString(1 / ans);
+                        label1.Text = "";
+                    }break;
+                case "Cosh":
+                    {
+
+                        double angle_degree = double.Parse(textBox1.Text);
+                      
+                        double angle_radian, sum = 0, term, nume, deno;
+                        angle_radian = (angle_degree * PI) / 180;
+                        int i = 2;
+                        nume = angle_radian;
+                        deno = 1;
+                        do
+                        {
+                            term = nume / deno;
+                            nume = -nume * angle_radian * angle_radian;
+                            deno = deno * i * (i + 1);
+                            sum = sum + term;
+                            i = i + 2;
+                        } while (term >= 0.00001);
+                        textBox1.Text = Convert.ToString(1 / sum);
+                        label1.Text = "";
+                    }break;
+                case "Tanh":
+                    {
+                         double angle_degree = double.Parse(textBox1.Text);
+            
+            double angle_radian, sum = 0, term, nume, deno;
+            angle_radian = (angle_degree * PI) / 180;
+            int a = 2;
+            nume = angle_radian;
+            deno = 1;
+            do
+            {
+                term = nume / deno;
+                nume = -nume * angle_radian * angle_radian;
+                deno = deno * a * (a + 1);
+                sum = sum + term;
+                a = a + 2;
+            } while (term >= 0.00001);
+            double ans = 1;
+            double temp = 1;
+            int accuracy = 4;
+            for (int i = 1; i <= 2 * accuracy; i += 2)
+            {
+                temp = temp * (-1) * angle_radian * angle_radian / (i * (i + 1));
+                ans += temp;
+            }
+            textBox1.Text = Convert.ToString( ans / sum);
+            label1.Text = "";
+
+                    }break;
+
+                case "sqrt":
+                    {
+                        int number = int.Parse(textBox1.Text);
+                        for (int i = 1; i <= number; i++)
+                        {
+                            if (i * i == number )
+                            {
+                                textBox1.Text =Convert.ToString( i);
+                            }
+                        }
+                        label1.Text = "";
+                    }break;
+                     
+                case "Cubrt":
+                    {
+                         int number = int.Parse(textBox1.Text);
+                         for (int i = 1; i <= number; i++)
+                         {
+                             if (i * i * i == number)
+                             {
+                                 textBox1.Text = Convert.ToString(i);
+                                 label1.Text = "";
+                                 break;
+                             }
+                         }
+                    }break;
+
+                case "Multi 2 Matrices":
+                    {
+                    }break;
+
+                case "x^2":
+                    {
+                        double number = double.Parse(textBox1.Text);
+                        double result = 1;
+                        for (int i = 1; i <= 2; i++)
+                        {
+                            result *= number;
+                        }
+                        textBox1.Text = Convert.ToString (result );
+                        label1.Text = "";
+                    }  break;
+
+                case "x^3":
+                    {
+                        double number = double.Parse(textBox1.Text);
+                        double result = 1;
+                        for (int i = 1; i <= 3 ; i++ )
+                        {
+                            result *= number;
+                        }
+                        textBox1.Text = Convert.ToString(result);
+                        label1.Text = "";
+                    }break;
+
+                case "e^x":
+                    {
+
+                        double power = double.Parse(textBox1.Text);
+                        int accuracy = 30;
+                        double answer = 1;
+                        double temp = 1;
+                        for (int i = 1; i <= accuracy; i++)
+                        {
+                            temp = (temp * power) / i;
+                            answer = answer + temp;
+                        }
+                        textBox1.Text = Convert.ToString(answer);
+                        label1.Text = "";
+                    }break;
+
+                case "even or odd":
+                    {
+
+                        int number = int.Parse(textBox1.Text);
+                        if (number % 2 == 0)
+                        {
+                            textBox1.Text = "even";
+                        }
+                        else
+                           textBox1.Text = "odd";
+                        label1.Text = "";
+                    }break;
+
+                case "prime or  not":
+                    {
+                        int number = int.Parse(textBox1.Text);
+                        bool prime = false;
+                        if (number == 1)
+                        {
+                            textBox1.Text = "is not prime  ";
+                        }
+                        else if (number == 2)
+                        {
+                            textBox1.Text = "prime  ";
+                        }
+                        else
+                        {
+                            for (int i = 2; i < number; i++)
+                            {
+                                if (number % i == 0)
+                                {
+                                    prime = false;
+                                    break;
+                                }
+                                else
+                                    prime = true;
+                            }
+                            if (prime)
+                            {
+                                textBox1.Text = "prime ";
+                            }
+                            else
+                                textBox1.Text = "is not prime ";
+                        }
+                        label1.Text = "";
+                    }break;
+
+                case "PI":
+                    {
+                        label1.Text = Convert.ToString(3.14);
+                    }
+                    break;
+
+                case "+":
+                    {
+                        double b = double.Parse(textBox1.Text);
+                        textBox1.Text = Convert.ToString((y+b));
+                        label1.Text="";
+                    }
+
+                    break;
+                case "-":
+                    {
+                        double b = double.Parse(textBox1.Text);
+                        textBox1.Text = Convert.ToString((y-b));
+                        label1.Text = "";
+                    }
+                    break;
+                case "*":
+                    {
+                        double b = double.Parse(textBox1.Text);
+                        textBox1.Text = Convert.ToString((y*b));
+                        label1.Text = "";
+                    }
+                    break;
+                case "/":
+                    {
+                        double b = double.Parse(textBox1.Text);
+                        textBox1.Text = Convert.ToString((y/b));
+                        label1.Text = "";
+                    }
+                    break;
+                    }
+
+
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {                                                                  // to control from the key board
+            switch (e.KeyChar)
+            {
+                case '+':
+                    {
+                        e.Handled = true;
+                        button4.PerformClick();
+                    } break;
+                case '-':
+                    {
+                        e.Handled = true;
+                        button9.PerformClick();
+                    } break;
+                case '*':
+                    {
+                        e.Handled = true;
+                        button13.PerformClick();
+                    } break;
+                case '/':
+                    {
+                        e.Handled = true;
+                        button17.PerformClick();
+                    } break;
+                case (char)Keys.Enter:
+                    {
+                        button18.PerformClick();
+                    } break;
+                case (char)Keys.Back:
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                case '0':
+                    e.Handled = false;
+                    break;
+                default:
+                    e.Handled = true;
+                    MessageBox.Show("Please Enter Numbers Only");
+                    break;
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
